@@ -47,5 +47,5 @@ _italic_
 .link http://golang.org golang.org
 
 - image
-.image /img/current.png 500 _
+.image ./img/current.png 500 _
 
