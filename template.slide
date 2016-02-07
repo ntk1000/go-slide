@@ -1,0 +1,51 @@
+title
+subtitle
+22 Jan 1982
+Tags: golang,present
+
+jun asano
+http://ntk1000.github.io/
+@ntk1000
+
+* usage
+
+  go get golang.org/x/net
+  go get golang.org/x/tools/present
+  cd $GOPATH/src/golang.org/x/tools/cmd/present
+  go install
+
+* page title
+
+talk about something
+
+* 
+
+** subsection
+
+list
+
+- w
+- t
+- f
+
+* 
+
+*** sub-subsection
+
+  preformatted text
+
+* font
+
+_italic_
+*bold*
+`program`
+[[www.example.com][inline link]]
+
+* other tag
+
+- link
+.link http://golang.org golang.org
+
+- image
+.image /img/current.png 500 _
+
