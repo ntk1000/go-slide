@@ -30,7 +30,7 @@ http://ntk1000.github.io/
 - yasuo fukuda: frontend engineer
 - x-yoshiki: bot
 
-* project
+* product
 .image ./img/logo.png 600 _
 
 * 
@@ -42,7 +42,7 @@ http://ntk1000.github.io/
 - single application as a suite of small services
 - each running in its own process
 - built around business capabilities
-- independently deploable
+- independently deployable
 - fully automated deployment
 - less centralized management of services
 
@@ -51,27 +51,74 @@ via [[http://martinfowler.com/articles/microservices/images/decentralised-data.p
 .image ./img/decentralised-data.png
 
 * 
-via [[http://martinfowler.com/articles/microservices/images/basic-pipeline.png]]
-.image ./img/basic-pipeline.png
-
-* 
 via [[http://martinfowler.com/articles/microservices/images/micro-deployment.png]]
 .image ./img/micro-deployment.png
+
+* 
+via [[http://martinfowler.com/articles/microservices/images/basic-pipeline.png]]
+.image ./img/basic-pipeline.png
 
 * 
 via [[http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif]]
 .image ./img/12factor.gif
 
+* technical requirements
+- lots of service/api, each service do one thing
+- deploy easily, automatically
 
+* golang
+
+* 
+via [[http://www.evanmiller.org/images/go-gopher3.png]]
+.image ./img/go-gopher3.png
+- portability
+- concurrency
 
 * docker
 
+* 
+via [[http://blog.xebialabs.com/wp-content/uploads/2015/09/docker.png]]
+.image ./img/docker.png 300 _
+- 1 container 1 service
+- disposable
+
 * coreos
 
+* 
+via [[http://www.vreference.com/wp-content/uploads/2014/06/coreos-wordmark-vert-color.png]]
+.image ./img/coreos-wordmark-vert-color.png 300 _
+- blue green deployment on os layer
+- etcd, fleet
+
 * hashicorp tools
+
+* 
+via [[http://www.slideshare.net/CiscoDevNet/devnet-1144-deploying-hybrid-apps-with-hashicorp]]
+.image ./img/devnet1144deploying-hybrid-cloud-applications-with-hashicorp-atlas-5-1024.jpg 600 _
+
+* 
+- oss
+- one binary written in go
+- 
 
 * current status
 
 * 
 .image ./img/current.png 600 _
+
+* todo
+
+* 
+- database!
+- security
+- service discovery
+- production deployment
+- infrastructure as code
+
+* to be
+
+* 
+
+.image ./img/current.png 600 _
+- 
 
