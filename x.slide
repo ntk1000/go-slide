@@ -1,51 +1,84 @@
-title
-subtitle
-22 Jan 1982
-Tags: golang,present
+team X
+building microservice with...
+9 Feb 2016
+Tags: golang,present,docker,hashicorp,coreos
 
 jun asano
 http://ntk1000.github.io/
 @ntk1000
 
-* usage
+* agenda
+- about X
+- microservice
+- docker
+- coreos
+- hashicorp tools
 
-  go get golang.org/x/net
-  go get golang.org/x/tools/present
-  cd $GOPATH/src/golang.org/x/tools/cmd/present
-  go install
+* about X
 
-* page title
+* me
+- 2016/01 -
+- media div. seeds company X
+- wannabe programmer
+- father of 2 boyz (4, 0 years old)
 
-talk about something
+* X ?
+.image ./img/x-logo.jpg 600 _
+
+* team members
+- kenji sugiura: leader
+- yasuo fukuda: frontend engineer
+- x-yoshiki: bot
+
+* project
+.image ./img/logo.png 600 _
 
 * 
+.image ./img/x.png 600 _
 
-** subsection
-
-list
-
-- w
-- t
-- f
+* microservice
 
 * 
+via [[http://martinfowler.com/articles/microservices/images/sketch.png]]
+.image http://martinfowler.com/articles/microservices/images/sketch.png
 
-*** sub-subsection
+* 
+via [[http://martinfowler.com/articles/microservices/images/conways-law.png]]
+.image http://martinfowler.com/articles/microservices/images/conways-law.png
 
-  preformatted text
+* 
+via [[http://martinfowler.com/articles/microservices/images/PreferFunctionalStaffOrganization.png]]
+.image http://martinfowler.com/articles/microservices/images/PreferFunctionalStaffOrganization.png
 
-* font
+* 
+via [[http://martinfowler.com/articles/microservices/images/decentralised-data.png]]
+.image http://martinfowler.com/articles/microservices/images/decentralised-data.png
 
-_italic_
-*bold*
-`program`
-[[www.example.com][inline link]]
+* 
+via [[http://martinfowler.com/articles/microservices/images/micro-deployment.png]]
+.image http://martinfowler.com/articles/microservices/images/micro-deployment.png
 
-* other tag
+* 
+via [[http://martinfowler.com/articles/microservices/images/basic-pipeline.png]]
+.image http://martinfowler.com/articles/microservices/images/basic-pipeline.png
 
-- link
-.link http://golang.org golang.org
+* 
+via [[http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif]]
+.image http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif
 
-- image
-.image ./img/current.png 500 _
+* technical requirements
+- operation automation
+- design for failure
+- graceful shutdown/restart
+
+* docker
+
+* coreos
+
+* hashicorp tools
+
+* current status
+
+* 
+.image ./img/current.png 600 _
 
