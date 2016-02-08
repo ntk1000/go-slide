@@ -25,7 +25,7 @@ http://ntk1000.github.io/
 * X ?
 .image ./img/x-logo.jpg 600 _
 
-* team members
+* x members
 - kenji sugiura: leader
 - yasuo fukuda: frontend engineer
 - x-yoshiki: bot
@@ -38,38 +38,31 @@ http://ntk1000.github.io/
 
 * microservice
 
-* 
-via [[http://martinfowler.com/articles/microservices/images/sketch.png]]
-.image http://martinfowler.com/articles/microservices/images/sketch.png
-
-* 
-via [[http://martinfowler.com/articles/microservices/images/conways-law.png]]
-.image http://martinfowler.com/articles/microservices/images/conways-law.png
-
-* 
-via [[http://martinfowler.com/articles/microservices/images/PreferFunctionalStaffOrganization.png]]
-.image http://martinfowler.com/articles/microservices/images/PreferFunctionalStaffOrganization.png
+* concept
+- single application as a suite of small services
+- each running in its own process
+- built around business capabilities
+- independently deploable
+- fully automated deployment
+- less centralized management of services
 
 * 
 via [[http://martinfowler.com/articles/microservices/images/decentralised-data.png]]
-.image http://martinfowler.com/articles/microservices/images/decentralised-data.png
-
-* 
-via [[http://martinfowler.com/articles/microservices/images/micro-deployment.png]]
-.image http://martinfowler.com/articles/microservices/images/micro-deployment.png
+.image ./img/decentralised-data.png
 
 * 
 via [[http://martinfowler.com/articles/microservices/images/basic-pipeline.png]]
-.image http://martinfowler.com/articles/microservices/images/basic-pipeline.png
+.image ./img/basic-pipeline.png
+
+* 
+via [[http://martinfowler.com/articles/microservices/images/micro-deployment.png]]
+.image ./img/micro-deployment.png
 
 * 
 via [[http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif]]
-.image http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif
+.image ./img/12factor.gif
 
-* technical requirements
-- operation automation
-- design for failure
-- graceful shutdown/restart
+
 
 * docker
 
