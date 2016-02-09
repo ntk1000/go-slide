@@ -98,9 +98,7 @@ via [[http://www.slideshare.net/CiscoDevNet/devnet-1144-deploying-hybrid-apps-wi
 
 * 
 - "infrastructure as code"
-- portability (one binary + json based config file)
-- oss
-- written in go
+- portability (one binary + json or json based config file)
 - tao of hashicorp
 - prevent vendor lock-in (without hashicorp...)
 
