@@ -1,7 +1,7 @@
-team X
-building microservice with...
+X
+building microservices with...
 9 Feb 2016
-Tags: golang,present,docker,hashicorp,coreos
+Tags: golang,present,docker,hashicorp,coreos,drone
 
 jun asano
 http://ntk1000.github.io/
@@ -61,22 +61,18 @@ via [[http://martinfowler.com/articles/microservices/images/basic-pipeline.png]]
 
 * technical requirements
 - lots of service/api, each service do one thing
-- easily, automatically deployment aka devops
+- easily, automatically deployment flow
 
 * 
 .image ./img/fig4-10.png 500 _
 via building microservices p.72 oreilly
-
-* 
-.image ./img/12factor.gif
-via [[http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif]]
 
 * golang
 
 * 
 .image ./img/go-gopher3.png
 - portability (one binary)
-- concurrency support
+- [[concurrency support][https://talks.golang.org/2012/waza.slide#4]]
 - type safe
 via [[http://www.evanmiller.org/images/go-gopher3.png]]
 
