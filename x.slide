@@ -11,8 +11,9 @@ http://ntk1000.github.io/
 - about X
 - microservice
 - docker
-- coreos
 - hashicorp tools
+- coreos
+- drone
 
 * about X
 
@@ -20,7 +21,7 @@ http://ntk1000.github.io/
 - 2016/01 -
 - media div. seeds company X
 - wannabe programmer
-- father of 2 boyz (4, 0 years old)
+- father of 2 boyz (4 and 0)
 
 * X ?
 .image ./img/x-logo.jpg 600 _
@@ -47,59 +48,83 @@ http://ntk1000.github.io/
 - less centralized management of services
 
 * 
-via [[http://martinfowler.com/articles/microservices/images/decentralised-data.png]]
 .image ./img/decentralised-data.png
+via [[http://martinfowler.com/articles/microservices/images/decentralised-data.png]]
 
 * 
-via [[http://martinfowler.com/articles/microservices/images/micro-deployment.png]]
 .image ./img/micro-deployment.png
+via [[http://martinfowler.com/articles/microservices/images/micro-deployment.png]]
 
 * 
-via [[http://martinfowler.com/articles/microservices/images/basic-pipeline.png]]
 .image ./img/basic-pipeline.png
-
-* 
-via [[http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif]]
-.image ./img/12factor.gif
+via [[http://martinfowler.com/articles/microservices/images/basic-pipeline.png]]
 
 * technical requirements
 - lots of service/api, each service do one thing
-- deploy easily, automatically
+- easily, automatically deployment aka devops
+
+* 
+.image ./img/fig4-10.png 500 _
+via building microservices p.72 oreilly
+
+* 
+.image ./img/12factor.gif
+via [[http://ryanjbaxter.com/wp-content/uploads/2015/07/12factor.gif]]
 
 * golang
 
 * 
-via [[http://www.evanmiller.org/images/go-gopher3.png]]
 .image ./img/go-gopher3.png
-- portability
-- concurrency
+- portability (one binary)
+- concurrency support
+- type safe
+via [[http://www.evanmiller.org/images/go-gopher3.png]]
 
 * docker
 
 * 
-via [[http://blog.xebialabs.com/wp-content/uploads/2015/09/docker.png]]
 .image ./img/docker.png 300 _
+- portability
 - 1 container 1 service
+- performance
 - disposable
-
-* coreos
-
-* 
-via [[http://www.vreference.com/wp-content/uploads/2014/06/coreos-wordmark-vert-color.png]]
-.image ./img/coreos-wordmark-vert-color.png 300 _
-- blue green deployment on os layer
-- etcd, fleet
+via [[http://blog.xebialabs.com/wp-content/uploads/2015/09/docker.png]]
 
 * hashicorp tools
 
 * 
-via [[http://www.slideshare.net/CiscoDevNet/devnet-1144-deploying-hybrid-apps-with-hashicorp]]
 .image ./img/devnet1144deploying-hybrid-cloud-applications-with-hashicorp-atlas-5-1024.jpg 600 _
+via [[http://www.slideshare.net/CiscoDevNet/devnet-1144-deploying-hybrid-apps-with-hashicorp]]
 
 * 
+- "infrastructure as code"
+- portability (one binary + json based config file)
 - oss
-- one binary written in go
-- 
+- written in go
+- tao of hashicorp
+- prevent vendor lock-in (without hashicorp...)
+
+* ここまでざっくり試しました
+
+* ここからまだ試せていない
+
+* coreos
+
+* 
+.image ./img/coreos-wordmark-vert-color.png 300 _
+- "designed for security, consistency, and reliability"
+- blue green deployment on os layer
+- etcd as service discovery
+- fleet as cluster management
+via [[http://www.vreference.com/wp-content/uploads/2014/06/coreos-wordmark-vert-color.png]]
+
+* drone
+
+* 
+.image ./img/alien-zap-header.png 200 _
+- continuous delivery platform built on docker, written in go
+- private bitbucket support!
+via [[https://drone.io/drone3000/images/alien-zap-header.png]]
 
 * current status
 
@@ -111,14 +136,22 @@ via [[http://www.slideshare.net/CiscoDevNet/devnet-1144-deploying-hybrid-apps-wi
 * 
 - database!
 - security
-- service discovery
-- production deployment
+- service discovery / cluster management
+- production deployment(automation, flow)
 - infrastructure as code
+- catch up tools
 
 * to be
 
 * 
 
-.image ./img/current.png 600 _
-- 
+.image ./img/tobe1.png _ 1000
+
+* 
+
+.image ./img/tobe2.png 600 _
+
+* 
+
+.image ./img/tobe3.png 600 _
 
