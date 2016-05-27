@@ -1,0 +1,47 @@
+X
+building microservices with...
+30 Jun 2016
+Tags: golang,present,docker,docker-compose,coreos,aws,ecs,ecr
+
+jun asano
+http://ntk1000.github.io/zlog
+@ntk1000
+
+* agenda
+- about X
+- current status
+- formation
+- local dev
+- aws stg/prod
+- todo
+
+* about X
+
+* me
+- 2016/01 -
+- works div. seeds company X
+- wannabe programmer
+- father of 2 boyz (4 and 0)
+
+* X ?
+.image ./img/x-logo.jpg 600 _
+
+* x members
+- kenji sugiura: leader
+- yasuo fukuda: frontend engineer
+- tomoya yuda: backend, batch engineer
+- yusuke komatsu: backend, api engineer
+
+* product
+.image ./img/x.png 600 _
+
+* current status
+
+* formation
+
+* local dev
+
+* aws stg/prod
+
+* todo
+- docker security (https://docs.docker.com/engine/security/security/)
