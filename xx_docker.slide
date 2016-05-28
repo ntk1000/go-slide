@@ -9,17 +9,39 @@ http://ntk1000.github.io/zlog
 
 * agenda
 - current status
-- formation
 - local dev
 - aws stg/prod
 - todo
 
 * current status
 - using docker from local dev to stg/prod env
-- 
+- docker-compose on local dev
+- aws ecs/ecr on stg/prod env
+- 全てがコンテナになる
+
+* components
+- nginx
+- nodejs app for frontend
+- golang app for backend api
+- mackerel-agent
+- aws-auth-proxy
+
+* components local only
+- redis -> Elasticache
+- mysql -> RDS
+- elastic search -> Elasticsearch
+- dynamodb local -> Dynamodb
 
 * local dev
 .image ./img/x.png 600 _
+
+* host
+- docker toolbox aka boot2docker
+- docker for macは試してない
+
+* orchestration
+- docker-compose!
+- example
 
 * aws stg/prod
 .image ./img/x.png 600 _
