@@ -42,7 +42,7 @@ http://ntk1000.github.io/zlog
 
 * docker os
 - alpine linux
-- イメージサイズ小さいことが重要
+- イメージサイズ小さい 正義
 - docker公式もalpine採用イメージ増えた
 
 * local dev docker orchestration
@@ -69,7 +69,7 @@ http://ntk1000.github.io/zlog
 * microservice
 - apiたくさんある それぞれvm立てるのは現実的でない
 - 自分が開発する部分以外のapiはdocker-composeで立てておいて連携確認
-- datastore(mysql, elastic search, dynamodb)もコンテナ化し、開発者間で同じデータを見る
+- 開発時はdatastore(mysql, elastic search, dynamodb)もコンテナ化し、開発者間で同じデータを見る
 
 * docker-compose
 - 良い
@@ -88,7 +88,8 @@ http://ntk1000.github.io/zlog
 * multi hosting
 - stg/prodでは役割毎にネットワーク構成変えてセキュリティ高めたい
 - frontend, backend api, datastoreの3構成
-- docker linkでは解決できない、いわゆるservice discoveryが必要
+- host跨いだ場合、docker linkでは解決できない、いわゆるservice discoveryが必要
+- docker networkingは未検証
 
 * service discovery
 - いくつか試した
