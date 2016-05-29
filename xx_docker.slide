@@ -40,6 +40,11 @@ http://ntk1000.github.io/zlog
 - docker toolbox aka boot2docker
 - docker for macは試してない 開発落ち着いたら切り替えたい
 
+* docker os
+- alpine linux
+- イメージサイズ小さいことが重要
+- docker公式もalpine採用イメージ増えた
+
 * local dev docker orchestration
 - docker-compose
 - docker link
@@ -95,6 +100,11 @@ http://ntk1000.github.io/zlog
 - kubernetesの今後に期待
 
 * aws ecs
+- コンテナ構成をtask definition、どのクラスタでtaskを動かすかをserviceという概念で定義
+- task definitionは大凡docker-composeで定義していた内容をjsonに直したもの ecrとは別にtask単位でrevision管理される
+- serviceはクラスタ(ec2 autoscale)とelb、動かすコンテナ数を定義
+- service discoveryで問題だった、どのアドレス+portでどのコンテナが動いているか、がelbに抽象化されるので管理が楽
+- 仮にコンテナが落ちたとしても希望するコンテナ数に達するまで自動的に起動してくれる
 
 * todo
 - docker security (https://docs.docker.com/engine/security/security/)
