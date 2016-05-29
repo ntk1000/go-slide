@@ -1,7 +1,6 @@
 docker pattern
-building microservices with...
 30 Jun 2016
-Tags: golang,present,docker,docker-compose,coreos,aws,ecs,ecr
+Tags: golang,docker,docker-compose,coreos,aws,ecs,ecr
 
 jun asano
 http://ntk1000.github.io/zlog
@@ -39,19 +38,19 @@ http://ntk1000.github.io/zlog
 
 * local dev host
 - docker toolbox aka boot2docker
-- docker for macは試してない 落ち着いたら切り替えたい
+- docker for macは試してない 開発落ち着いたら切り替えたい
 
 * local dev docker orchestration
 - docker-compose
 - docker link
-- example
 
 * nodejs
-- build遅い問題
-- npm install済のイメージとapp add及び起動のみのイメージに分けた方がよさそ
+- docker build遅い問題
+- npm install済のイメージとapp add及び起動のみのイメージに分けた方がよさそう
 
 * golang
-- buildしたバイナリをaddして起動するだけ
+- go buildしたバイナリをaddして起動するだけ
+- go build遅い問題はある
 
 * middleware
 - confで設定する系(fluentd,nginxなど) 公式イメージにconf addしたものでイメージ化
@@ -64,11 +63,13 @@ http://ntk1000.github.io/zlog
 
 * microservice
 - apiたくさんある それぞれvm立てるのは現実的でない
-- 自分が開発する部分以外の箇所はdocker-composeで立てておいて連携確認
+- 自分が開発する部分以外のapiはdocker-composeで立てておいて連携確認
 - datastore(mysql, elastic search, dynamodb)もコンテナ化し、開発者間で同じデータを見る
 
 * docker-compose
 - 良い
+- コンテナ間依存関係の可視化、どこを環境変数で管理すべきか、yamlで把握しやすい
+- 一部dockerコマンドのラッパーになっており、操作が楽(dockerコマンドオプション多すぎて覚えられない😭)
 
 * aws stg/prod
 .image ./img/x.png 600 _
