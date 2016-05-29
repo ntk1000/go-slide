@@ -34,7 +34,7 @@ http://ntk1000.github.io/zlog
 - dockerで頑張らない(運用辛そう)
 
 * local dev
-.image ./img/x.png 600 _
+.image ./img/localdev.png 600 _
 
 * local dev host
 - docker toolbox aka boot2docker vm
@@ -86,7 +86,7 @@ http://ntk1000.github.io/zlog
 - (docker単体のコマンドはオプション多すぎて覚えられない😭)
 
 * aws stg/prod
-.image ./img/x.png 600 _
+.image ./img/aws.png 600 _
 
 * aws ecr
 - private container registry
