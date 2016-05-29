@@ -52,6 +52,14 @@ http://ntk1000.github.io/zlog
 * golang
 - buildしたバイナリをaddして起動するだけ
 
+* components
+- conf
+
+* environment variables
+- 12 factor appの教え
+
+
+
 * microservice
 - apiたくさんある
 - 自分が開発する部分以外の箇所はdocker-composeで立てておいて連携確認
@@ -59,6 +67,10 @@ http://ntk1000.github.io/zlog
 
 * aws stg/prod
 .image ./img/x.png 600 _
+
+* aws ecr
+
+* 
 
 * todo
 - docker security (https://docs.docker.com/engine/security/security/)
