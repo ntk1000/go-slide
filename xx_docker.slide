@@ -63,7 +63,7 @@ http://ntk1000.github.io/zlog
 - キー情報などはconfluence管理
 
 * microservice
-- apiたくさんある
+- apiたくさんある それぞれvm立てるのは現実的でない
 - 自分が開発する部分以外の箇所はdocker-composeで立てておいて連携確認
 - datastore(mysql, elastic search, dynamodb)もコンテナ化し、開発者間で同じデータを見る
 
