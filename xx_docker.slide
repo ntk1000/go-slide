@@ -31,15 +31,17 @@ http://ntk1000.github.io/zlog
 - mysql -> RDS
 - elastic search -> Elasticsearch
 - dynamodb local -> Dynamodb
+- datastore系はdbaasに任せる
+- dockerで頑張らない
 
 * local dev
 .image ./img/x.png 600 _
 
-* host
+* local dev host
 - docker toolbox aka boot2docker
-- docker for macは試してない
+- docker for macは試してない 落ち着いたら切り替えたい
 
-* orchestration
+* local dev docker orchestration
 - docker-compose
 - docker link
 - example
