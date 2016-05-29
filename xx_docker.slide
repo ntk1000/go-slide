@@ -48,24 +48,27 @@ http://ntk1000.github.io/zlog
 
 * nodejs
 - build遅い問題
-- npm install済のイメージを作る
-- app add 起動のみのイメージにする
+- npm install済のイメージとapp add及び起動のみのイメージに分けた方がよさそ
 
 * golang
 - buildしたバイナリをaddして起動するだけ
 
-* components
-- conf
+* middleware
+- confで設定する系(fluentd,nginxなど) 公式イメージにconf addしたものでイメージ化
+- confで設定且つ中身を動的に変えたい系(mackerel-agent,nginxなど) entrykitをaddしてentrykit経由でいじる
 
 * environment variables
 - 12 factor appの教え
-
-
+- 環境で変動するもの、ソース管理させないものは環境変数に封じ込める
+- キー情報などはconfluence管理
 
 * microservice
 - apiたくさんある
 - 自分が開発する部分以外の箇所はdocker-composeで立てておいて連携確認
 - datastore(mysql, elastic search, dynamodb)もコンテナ化し、開発者間で同じデータを見る
+
+* docker-compose
+- 良い
 
 * aws stg/prod
 .image ./img/x.png 600 _
