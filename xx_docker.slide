@@ -106,5 +106,11 @@ http://ntk1000.github.io/zlog
 - service discoveryで問題だった、どのアドレス+portでどのコンテナが動いているか、がelbに抽象化されるので管理が楽
 - 仮にコンテナが落ちたとしても希望するコンテナ数に達するまで自動的に起動してくれる
 
+* blue green deployment
+- 一番嬉しい機能
+- service updateした時にelbから接続先コンテナの切替をよしなにやってくれる
+- taskがrevision管理されてるので問題があった場合の切り戻しもほぼ同じ手順でできる(前のrevision指定し、service update)
+- taskが指すコンテナのバージョンも厳密に区別がつくよう、git commit hashをバージョンとしている
+
 * todo
 - docker security (https://docs.docker.com/engine/security/security/)
