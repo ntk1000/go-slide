@@ -89,43 +89,43 @@ http://ntk1000.github.io/zlog
 .image ./img/x.png 600 _
 
 * aws ecr
-- private docker repository
+- private container registry
 - full managed
 - 12時間で認証切れるのでdocker pull/pushする際は再認証するようにしている
-- tokyo region対応はよ
+- tokyo region対応望まれる
 
 * multi hosting
 - stg/prodでは役割毎にネットワーク構成変えてセキュリティ高めたい
-- frontend, backend api, datastoreの3構成
+- frontend, backend api, datastoreの3構成が最低限必要
 - host跨いだ場合、docker linkでは解決できない、いわゆるservice discoveryが必要
-- docker networkingは未検証
 
 * service discovery
 - いくつか試した
 - ambassador
 - etcd, skydns, registrator
 - kubernetes
-- 構成の煩雑さやパフォーマンス、awsの対応状況などを理由に採用断念
-- weaveは試してない
-- kubernetesの今後に期待
+- 構成の煩雑さやパフォーマンス、awsの対応状況などを理由に採用断念😣
+- weave, docker networkingは試してない
+- kubernetesの今後に期待😇
 
 * aws ecs
 - コンテナ構成をtask definition、どのクラスタでtaskを動かすかをserviceという概念で定義
-- task definitionは大凡docker-composeで定義していた内容をjsonに直したもの ecrとは別にtask単位でrevision管理される
+- task definitionは大凡docker-composeで定義していた内容をjsonに直したもの
+- ecrとは別にtask単位でrevision管理される
 - serviceはクラスタ(ec2 autoscale)とelb、動かすコンテナ数を定義
-- service discoveryで問題だった、どのアドレス+portでどのコンテナが動いているか、がelbに抽象化されるので管理が楽
-- 仮にコンテナが落ちたとしても希望するコンテナ数に達するまで自動的に起動してくれる
+- service discoveryで問題だった、どこでコンテナが動いているか、がelbに限定されるので管理が楽
+- (1elbでport毎の定義ができればもっと便利になる)
+- コンテナが落ちても希望する稼働コンテナ数に達するまで自動的に起動してくれる
 
 * blue green deployment
-- 一番嬉しい機能
-- service updateした時にelbから接続先コンテナの切替をよしなにやってくれる
+- 一番嬉しい機能☺️
+- service updateした時にelbから接続先コンテナのバージョン切替をよしなにやってくれる
 - taskがrevision管理されてるので問題があった場合の切り戻しもほぼ同じ手順でできる(前のrevision指定し、service update)
-- taskが指すコンテナのバージョンも厳密に区別がつくよう、git commit hashをバージョンとしている
+- taskが指すコンテナのバージョンも厳密に区別がつくよう、git commit hashをタグ付けするようにした
 
 * stg/prod host
-- ecs(amazon linux軽量化してdockerとecs-agent載せたもの)
-- coreos
+- ecs(amazon linux軽量化してdockerとecs-agent載せたもの)と coreosを併用
 - 本当はcoreosにまとめたいが、cloudwatchlogs動かなかったり不安定なのでまだ様子見
 
 * todo
-- docker security (https://docs.docker.com/engine/security/security/)
+- docker securityを高める(https://docs.docker.com/engine/security/security/)
