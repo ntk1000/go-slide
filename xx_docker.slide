@@ -75,6 +75,10 @@ http://ntk1000.github.io/zlog
 .image ./img/x.png 600 _
 
 * aws ecr
+- private docker repository
+- full managed
+- 12時間で認証切れるのでdocker pull/pushする際は再認証するようにしている
+- tokyo region対応はよ
 
 * multi hosting
 
