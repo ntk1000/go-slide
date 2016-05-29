@@ -72,14 +72,18 @@ http://ntk1000.github.io/zlog
 - キー情報などはconfluence管理
 
 * microservice
-- apiたくさんある それぞれvm立てるのは現実的でない
-- 自分が開発する部分以外のapiはdocker-composeで立てておいて連携確認
+- apiたくさんある
+- それぞれvm立てるのは現実的でない
+- コンテナとの親和性は高い
+- 自分が開発する部分以外のapiはdocker-composeで立てておけばわざわざモックを作らなくて良い
 - 開発時はdatastore(mysql, elastic search, dynamodb)もコンテナ化し、開発者間で同じデータを見る
 
 * docker-compose
-- 良い
-- コンテナ間依存関係の可視化、どこを環境変数で管理すべきか、yamlで把握しやすい
-- 一部dockerコマンドのラッパーになっており、操作が楽(dockerコマンドオプション多すぎて覚えられない😭)
+- 総じて良い
+- v2まだ試してない
+- コンテナ間依存関係の可視化、どこを環境変数で管理すべきか、yamlなので把握しやすい
+- 一部dockerコマンドのラッパーになっており、操作が楽
+- (docker単体のコマンドはオプション多すぎて覚えられない😭)
 
 * aws stg/prod
 .image ./img/x.png 600 _
