@@ -81,8 +81,18 @@ http://ntk1000.github.io/zlog
 - tokyo region対応はよ
 
 * multi hosting
+- stg/prodでは役割毎にネットワーク構成変えてセキュリティ高めたい
+- frontend, backend api, datastoreの3構成
+- docker linkでは解決できない、いわゆるservice discoveryが必要
 
 * service discovery
+- いくつか試した
+- ambassador
+- etcd, skydns, registrator
+- kubernetes
+- 構成の煩雑さやパフォーマンス、awsの対応状況などを理由に採用断念
+- weaveは試してない
+- kubernetesの今後に期待
 
 * aws ecs
 
