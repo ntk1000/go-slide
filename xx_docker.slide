@@ -75,7 +75,11 @@ http://ntk1000.github.io/zlog
 
 * aws ecr
 
-* 
+* multi hosting
+
+* service discovery
+
+* aws ecs
 
 * todo
 - docker security (https://docs.docker.com/engine/security/security/)
