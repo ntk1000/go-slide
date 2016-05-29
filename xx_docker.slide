@@ -7,15 +7,15 @@ http://ntk1000.github.io/zlog
 @ntk1000
 
 * agenda
-- current status
+- components
 - local dev
 - aws stg/prod
 - todo
 
-* current status
-- using docker from local dev to stg/prod env
+* summary
+- using docker from local dev to stg/prod
 - docker-compose on local dev
-- aws ecs/ecr on stg/prod env
+- aws ecs/ecr on stg/prod
 - 全部コンテナで管理
 
 * components
@@ -31,23 +31,26 @@ http://ntk1000.github.io/zlog
 - elastic search -> Elasticsearch
 - dynamodb local -> Dynamodb
 - datastore系はdbaasに任せる
-- dockerで頑張らない(運用面倒)
+- dockerで頑張らない(運用辛そう)
 
 * local dev
 .image ./img/x.png 600 _
 
 * local dev host
-- docker toolbox aka boot2docker
-- docker for macは試してない 開発落ち着いたら切り替えたい
+- docker toolbox aka boot2docker vm
+- docker for macは試してない
+- 開発落ち着いたら切り替えたい
 
 * docker os
 - alpine linux
-- イメージサイズ小さい 正義
+- docker push/pull頻繁に行うのでイメージサイズ小さいことが重要
 - docker公式もalpine採用イメージ増えた
 
 * local dev docker orchestration
 - docker-compose
 - docker link
+
+* docker-compose.yaml
 
 * nodejs
 - docker build遅い問題
@@ -55,11 +58,13 @@ http://ntk1000.github.io/zlog
 
 * golang
 - go buildしたバイナリをaddして起動するだけ
-- go build遅い問題はある
+- go build遅い問題はある(go buildよりgo installのが早いらしい？)
 
 * middleware
-- confで設定する系(fluentd,nginxなど) 公式イメージにconf addしたものでイメージ化
-- confで設定且つ中身を動的に変えたい系(mackerel-agent,nginxなど) entrykitをaddしてentrykit経由でいじる
+- confで設定する系(fluentd,nginxなど)
+- 公式イメージに自前のconfを追加したものでイメージ化
+- confで設定且つ中身を動的に変えたい系(mackerel-agent,nginxなど)
+- entrykitをaddしてentrykit経由でいじる(環境変数で変更できる)
 
 * environment variables
 - 12 factor appの教え
