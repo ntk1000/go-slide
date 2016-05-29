@@ -16,7 +16,7 @@ http://ntk1000.github.io/zlog
 - using docker from local dev to stg/prod env
 - docker-compose on local dev
 - aws ecs/ecr on stg/prod env
-- 全てがコンテナになる
+- 全部コンテナで管理
 
 * components
 - nginx
@@ -31,7 +31,7 @@ http://ntk1000.github.io/zlog
 - elastic search -> Elasticsearch
 - dynamodb local -> Dynamodb
 - datastore系はdbaasに任せる
-- dockerで頑張らない
+- dockerで頑張らない(運用面倒)
 
 * local dev
 .image ./img/x.png 600 _
@@ -111,6 +111,11 @@ http://ntk1000.github.io/zlog
 - service updateした時にelbから接続先コンテナの切替をよしなにやってくれる
 - taskがrevision管理されてるので問題があった場合の切り戻しもほぼ同じ手順でできる(前のrevision指定し、service update)
 - taskが指すコンテナのバージョンも厳密に区別がつくよう、git commit hashをバージョンとしている
+
+* stg/prod host
+- ecs(amazon linux軽量化してdockerとecs-agent載せたもの)
+- coreos
+- 本当はcoreosにまとめたいが、cloudwatchlogs動かなかったり不安定なのでまだ様子見
 
 * todo
 - docker security (https://docs.docker.com/engine/security/security/)
