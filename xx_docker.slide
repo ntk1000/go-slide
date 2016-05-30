@@ -35,7 +35,7 @@ http://ntk1000.github.io/zlog
 - dockerで頑張らない(運用辛そう)
 
 * local dev
-.image ./img/localdev.png 600 _
+.image ./img/localdev.png 550 _
 
 * local dev host
 - docker toolbox aka boot2docker vm
@@ -92,11 +92,13 @@ http://ntk1000.github.io/zlog
 - 公式イメージに自前のconfを追加したものでイメージ化
 - confで設定且つ中身を動的に変えたい系(mackerel-agent,nginxなど)
 - entrykitをaddしてentrykit経由でいじる(環境変数で変更できる)
+.link https://github.com/progrium/entrykit entrykit
 
 * environment variables
 - 12 factor appの教え
 - 環境で変動するもの、ソース管理させないものは環境変数に封じ込める
 - キー情報などはconfluence管理
+.link http://12factor.net/ja/ 12factorapp
 
 * microservice
 - apiたくさんある
@@ -113,7 +115,7 @@ http://ntk1000.github.io/zlog
 - (docker単体のコマンドはオプション多すぎて覚えられない😭)
 
 * aws stg/prod
-.image ./img/aws.png 600 _
+.image ./img/aws.png 550 _
 
 * aws ecr
 - private container registry
@@ -150,6 +152,18 @@ http://ntk1000.github.io/zlog
 - taskがrevision管理されてるので問題があった場合の切り戻しもほぼ同じ手順でできる(前のrevision指定し、service update)
 - taskが指すコンテナのバージョンも厳密に区別がつくよう、git commit hashをタグ付けするようにした
 
+* step1
+.image https://blog.codeship.com/wp-content/uploads/2015/09/Tasks-split-between-two-EC2-instances.jpg 550 _
+
+* step2
+.image https://blog.codeship.com/wp-content/uploads/2015/09/ECS-launches-a-new-task.jpg 550 _
+
+* step3
+.image https://blog.codeship.com/wp-content/uploads/2015/09/ECS-killing-tasks-and-launching-new-ones.jpg 550 _
+
+* step4
+.image https://blog.codeship.com/wp-content/uploads/2015/09/ECS-has-met-the-desired-tasks.jpg 550 _
+
 * stg/prod host
 - ecs(amazon linux軽量化してdockerとecs-agent載せたもの)と coreosを併用
 - 本当はcoreosにまとめたいが、cloudwatchlogs動かなかったり不安定なのでまだ様子見
@@ -158,4 +172,4 @@ http://ntk1000.github.io/zlog
 - docker securityを高める(https://docs.docker.com/engine/security/security/)
 
 * まとめ
-.image ./img/containeraddicted.png 600 _
+.image ./img/containeraddicted.png 550 _
