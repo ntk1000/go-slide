@@ -152,16 +152,17 @@ http://ntk1000.github.io/zlog
 - taskがrevision管理されてるので問題があった場合の切り戻しもほぼ同じ手順でできる(前のrevision指定し、service update)
 - taskが指すコンテナのバージョンも厳密に区別がつくよう、git commit hashをタグ付けするようにした
 
-* step1
+* step1 current service runs
 .image https://blog.codeship.com/wp-content/uploads/2015/09/Tasks-split-between-two-EC2-instances.jpg 550 _
+via https://blog.codeship.com/easy-blue-green-deployments-on-amazon-ec2-container-service/
 
-* step2
+* step2 service updated, runs new service
 .image https://blog.codeship.com/wp-content/uploads/2015/09/ECS-launches-a-new-task.jpg 550 _
 
-* step3
+* step3 draining existing service
 .image https://blog.codeship.com/wp-content/uploads/2015/09/ECS-killing-tasks-and-launching-new-ones.jpg 550 _
 
-* step4
+* step4 done
 .image https://blog.codeship.com/wp-content/uploads/2015/09/ECS-has-met-the-desired-tasks.jpg 550 _
 
 * stg/prod host
@@ -169,7 +170,8 @@ http://ntk1000.github.io/zlog
 - 本当はcoreosにまとめたいが、cloudwatchlogs動かなかったり不安定なのでまだ様子見
 
 * todo
-- docker securityを高める(https://docs.docker.com/engine/security/security/)
+- docker securityを高める
+.link https://docs.docker.com/engine/security/security/ docker security
 
 * まとめ
 .image ./img/containeraddicted.png 550 _
