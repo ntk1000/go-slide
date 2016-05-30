@@ -26,11 +26,12 @@ http://ntk1000.github.io/zlog
 - aws-auth-proxy
 
 * components local only
+- 全部コンテナでと言ったけど...
+- datastore系はdbaasに任せる
 - redis -> Elasticache
 - mysql -> RDS
 - elastic search -> Elasticsearch
 - dynamodb local -> Dynamodb
-- datastore系はdbaasに任せる
 - dockerで頑張らない(運用辛そう)
 
 * local dev
@@ -51,6 +52,32 @@ http://ntk1000.github.io/zlog
 - docker link
 
 * docker-compose.yaml
+	nginx:
+	  build: ../toolbox/nginx
+	  environment:
+	    - TZ=JST-9
+	  ports:
+	    - "80:80"
+	  links:
+	    - ui
+	
+	ui:
+	  build: ../ui
+	  environment:
+	    - NODE_PORT=3000
+	    - NODE_WS_PORT=8080
+	    - NODE_ENV=production
+	  ports:
+	    - "3000:3000"
+	    - "443:8080"
+	  links:
+	    - redis_front
+	
+	redis_front:
+	  image: redis:alpine
+	  environment:
+	    - TZ=JST-9
+
 
 * nodejs
 - docker build遅い問題
@@ -129,3 +156,6 @@ http://ntk1000.github.io/zlog
 
 * todo
 - docker securityを高める(https://docs.docker.com/engine/security/security/)
+
+* まとめ
+.image ./img/containeraddicted.png 600 _
