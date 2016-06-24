@@ -1,0 +1,29 @@
+X
+last gigs
+30 Jun 2016
+Tags: golang,present,docker,hashicorp,coreos,drone
+
+jun asano
+http://ntk1000.github.io/
+@ntk1000
+
+* x
+.image ./img/x-logo.jpg 600 _
+
+* last gigs 
+.image ./img/lastgigs.jpg 600 _
+
+* 5 min live with
+.image ./img/aws-logo.jpg 600 _
+
+* architecture overview
+.image ./img/aws.png 550 _
+
+* process
+- 
+- each running in its own process
+- built around business capabilities
+- independently deployable
+- fully automated deployment
+- less centralized management of services
+
