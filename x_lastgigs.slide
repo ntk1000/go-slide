@@ -11,19 +11,17 @@ http://ntk1000.github.io/
 .image ./img/x-logo.jpg 600 _
 
 * last gigs 
-.image ./img/lastgigs.jpg 600 _
+.image ./img/lastgigs.jpeg 600 _
 
 * 5 min live with
-.image ./img/aws-logo.jpg 600 _
+.image ./img/aws-logo.png 600 _
 
 * architecture overview
 .image ./img/aws.png 550 _
 
 * process
-- 
-- each running in its own process
-- built around business capabilities
-- independently deployable
-- fully automated deployment
-- less centralized management of services
-
+- launch clusters
+ - ./elb terraform apply
+ - ./asg terraform apply
+- deploy containers
+ - ./etc make deploy-stg-front
