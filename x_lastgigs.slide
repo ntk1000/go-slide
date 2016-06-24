@@ -10,11 +10,11 @@ http://ntk1000.github.io/
 * x
 .image ./img/x-logo.jpg 600 _
 
-* last gigs 
-.image ./img/lastgigs.jpeg 600 _
+* last gig 
+.image ./img/lastgigs.jpeg 400 _
 
 * 5 min live with
-.image ./img/aws-logo.png 600 _
+.image ./img/aws-logo.png 400 _
 
 * architecture overview
 .image ./img/aws.png 550 _
