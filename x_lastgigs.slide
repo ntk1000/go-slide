@@ -1,10 +1,10 @@
 X
-last gigs
+last gig
 30 Jun 2016
 Tags: golang,present,docker,hashicorp,coreos,drone
 
 jun asano
-http://ntk1000.github.io/
+http://ntk1000.github.io/zlog
 @ntk1000
 
 * x
@@ -16,12 +16,22 @@ http://ntk1000.github.io/
 * 5 min live with
 .image ./img/aws-logo.png 400 _
 
+* song1
+
+- launch clusters
+ - ./elb terraform apply # create elastic load balancer
+ - ./asg terraform apply # setup autoscaling = launch ec2 clusters with ecs settings
+
+* song2
+
+- deploy containers
+ - ./etc make deploy-stg-front # deploy local container and update ecs service
+
+* song3
+
+- destroy all
+ - ./elb terraform destroy # delete elastic load balancer
+ - ./asg terraform apply # setup autoscaling instance 0 = delete ec2 clusters
+
 * architecture overview
 .image ./img/aws.png 550 _
-
-* process
-- launch clusters
- - ./elb terraform apply
- - ./asg terraform apply
-- deploy containers
- - ./etc make deploy-stg-front
