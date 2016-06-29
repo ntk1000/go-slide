@@ -1,5 +1,5 @@
 X
-last gig
+last gigs
 30 Jun 2016
 Tags: golang,present,docker,hashicorp,coreos,drone
 
@@ -7,31 +7,38 @@ jun asano
 http://ntk1000.github.io/zlog
 @ntk1000
 
-* x
+* r.i.p. x-yoshiki(bot)
 .image ./img/x-logo.jpg 600 _
 
-* last gig 
+* last gigs
 .image ./img/lastgigs.jpeg 400 _
 
-* 5 min live with
-.image ./img/aws-logo.png 400 _
+* 7 min live with
+.image ./img/aws-logo.png 300 _
 
-* song1
+* gig 1
 
 - launch clusters
- - ./elb terraform apply # create elastic load balancer
- - ./asg terraform apply # setup autoscaling = launch ec2 clusters with ecs settings
+  # create elastic load balancer
+  ./elb terraform apply
 
-* song2
+  # setup autoscaling = launch ec2 clusters with ecs settings
+  ./asg terraform apply 
+
+* gig 2
 
 - deploy containers
- - ./etc make deploy-stg-front # deploy local container and update ecs service
+  # deploy local container and update ecs service
+  ./etc make deploy-stg-front
 
-* song3
+* last gig
 
 - destroy all
- - ./elb terraform destroy # delete elastic load balancer
- - ./asg terraform apply # setup autoscaling instance 0 = delete ec2 clusters
+  # delete elastic load balancer
+  ./elb terraform destroy
+
+  # setup autoscaling instance 0 = delete ec2 clusters
+  ./asg terraform apply
 
 * architecture overview
 .image ./img/aws.png 550 _
