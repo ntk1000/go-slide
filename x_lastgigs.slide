@@ -16,20 +16,14 @@ http://ntk1000.github.io/zlog
 * 7 min live with
 .image ./img/aws-logo.png 300 _
 
-* gig 1
+* first gig 
 
-- launch clusters
+- launch
   # create elastic load balancer
   ./elb terraform apply
 
   # setup autoscaling = launch ec2 clusters with ecs settings
   ./asg terraform apply 
-
-* gig 2
-
-- deploy containers
-  # deploy local container and update ecs service
-  ./etc make deploy-stg-front
 
 * last gig
 
