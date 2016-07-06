@@ -1,0 +1,38 @@
+docker study
+12 factor app
+1 Jul 2016
+Tags: golang,docker,immutable infrastructure, infrastructure as a code
+
+jun asano
+http://ntk1000.github.io/zlog
+@ntk1000
+
+* 12 factor app
+
+.link http://12factor.net/ja/
+.link http://wazanova.jp/items/1388 解説
+
+* heroku
+
+.link https://www.heroku.com/
+
+* background
+
+- continuous deploy
+- cloud platform
+- dynamic scaling up/down
+
+* cloud platform
+
+* 2. 依存関係の明示化, 3. 設定を環境変数に
+
+- infrastructure as a code
+
+* 10. 開発・本番一致
+
+- 開発と本番環境をできるだけ同じにして、環境差異による影響を抑える
+
+* example
+
+.link http://qiita.com/awakia/items/04135ea89be787be1cfc wantedly
+
