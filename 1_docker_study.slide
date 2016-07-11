@@ -7,32 +7,90 @@ jun asano
 http://ntk1000.github.io/zlog
 @ntk1000
 
+* do you know heroku?
+
+.link https://www.heroku.com/
+
+- app platform as a service
+- git integrated
+- using container(not docker)
+
 * 12 factor app
 
 .link http://12factor.net/ja/
 .link http://wazanova.jp/items/1388 解説
 
-* heroku
+- written by heroku
+- herokuに限った話ではない
+- "modern"なwebappを構築する上で押さえとくべきポイントとその解説
 
-.link https://www.heroku.com/
+* why 12 factor app?
 
-* background
+- herokuがcontainer使ってることもあるし、dockerが流行った流れとも無縁じゃない
+- Xを振り返ると自然と12 factorに沿っている部分が多かった
+- herokuは(俺の中で)死んだが、practiceは活きている
 
-- continuous deploy
-- cloud platform
-- dynamic scaling up/down
+* 1. コードベース
 
-* cloud platform
+- 省略
+- 原理主義者としてはサーバーの設定ファイルもvcs管理下に置くべきと考える(gitを中心としたdeployフローに載せられるので)
 
 * 2. 依存関係の明示化, 3. 設定を環境変数に
 
-- infrastructure as a code
+- no more "秘伝のタレ"
+- 環境変数はどの環境にもあるし、plaggableに扱える万能ツール
+- 環境ごとに変更すべき要素を環境変数にまとめる
+
+* 4. app以外のサービス(DB,cache,cue etc.)はendpoint(URLなど)で切替できるようにする
+
+- mysqlやredisの接続先
+- 環境変数にすればもっと扱いやすくなる
+
+* 5. build, release, runフェーズの分離
+
+- runは古いバージョンからの切替(blue/green deployment)とかを指してるのだと思う
+
+* 6. stateless
+
+- appに状態を持たせない
+- cache serverやDBに保存する
+- aka shared nothing
+
+* 7. http portのバインド
+
+- ？ちょっとしっくりきていない
+- Xの時はdockerに沿うと自然とそうなっていた
+- app単体で自己完結させ、http port経由で繋げるようにする
+- rails -> 3000 port, apache or nginx -> 80 port, nginx=>rails -> 80=>3000
+
+* 8. スケーラビリティ
+
+- server/container/process増やせば性能がスケールするつくりじゃないと厳しい
+
+* 9. 廃棄が容易
+
+- 裏を返せば起動と終了が即座に完了する必要がある
+- 突然の死に対して堅牢であること
 
 * 10. 開発・本番一致
 
 - 開発と本番環境をできるだけ同じにして、環境差異による影響を抑える
+- 安心
+
+* 11. ログ
+
+- appは標準出力に書き出すのみ
+- 以降の扱いはログルーター(fluentとか)に任せる
+- ファイルに吐くとか分析基盤に流すとかはログルーターの役割
+
+* 12. 管理プロセス
+
+- ？これもちょっとしっくりきていないけど
+- Xの時はデータの流し込み用のapi container作ってdeploy時に1回だけ叩く、ということをやっていた(one off container pattern)
 
 * example
+
+- wantedly's case
 
 .link http://qiita.com/awakia/items/04135ea89be787be1cfc wantedly
 
