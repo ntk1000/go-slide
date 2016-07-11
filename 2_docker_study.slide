@@ -1,0 +1,61 @@
+docker study
+hello docker world
+12 Jul 2016
+Tags: golang,docker,immutable infrastructure, infrastructure as a code
+
+jun asano
+http://ntk1000.github.io/zlog
+@ntk1000
+
+* agenda
+
+- hello world
+- docker concept
+
+* hello world
+
+- one shot
+  docker run gliderlabs/alpine:3.3 echo "hello docker world"
+
+* what's happened?
+
+- command
+  docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+
+- pull image from docker registry
+  Unable to find image 'gliderlabs/alpine:3.3' locally
+  3.3: Pulling from gliderlabs/alpine
+  0536461c598c: Pull complete
+  Digest: sha256:29a42a93d8af31ce43740d546c8e5a412e2f39abc79bd7177b2acadcafd98689
+  Status: Downloaded newer image for gliderlabs/alpine:3.3
+
+- shell result
+  hello docker world
+
+* where's "container"?
+
+- ps
+  docker ps
+
+- list "images"
+  docker images
+
+* one more
+
+- interactive session with "-it" option 
+  docker run -it gliderlabs/alpine:3.3 /bin/sh
+
+- ps
+  docker ps
+
+- exit, then run again
+
+- stateless needed
+
+* vs vm
+
+.image ./img/usingdocker_fig1_vm.png 400 _
+
+* vs vm
+
+.image ./img/usingdocker_fig2_container.png 400 _

@@ -1,0 +1,14 @@
+docker study
+run your app via Docker
+14 Jul 2016
+Tags: golang,docker,immutable infrastructure, infrastructure as a code
+
+jun asano
+http://ntk1000.github.io/zlog
+@ntk1000
+
+* agenda
+
+- Dockerfile
+- saiyo1/m2's case
+- image layer
