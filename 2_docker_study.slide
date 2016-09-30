@@ -52,6 +52,18 @@ http://ntk1000.github.io/zlog
 
 - stateless needed
 
+* registry
+
+- docker hub
+.link https://hub.docker.com/
+
+- quay.io
+.link https://quay.io/
+
+- private repos
+.link https://docs.docker.com/registry/
+.link https://aws.amazon.com/jp/ecr/
+
 * vs vm
 
 .image ./img/usingdocker_fig1_vm.png 400 _

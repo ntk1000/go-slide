@@ -1,5 +1,5 @@
 docker study
-run your app via Docker
+use docker
 14 Jul 2016
 Tags: golang,docker,immutable infrastructure, infrastructure as a code
 
@@ -9,6 +9,123 @@ http://ntk1000.github.io/zlog
 
 * agenda
 
+- use case
 - Dockerfile
 - saiyo1/m2's case
 - image layer
+- X's case
+- docker-compose
+
+* use case
+
+- example
+.link https://github.com/dtan4/terraforming
+.link https://github.com/dtan4/dockerfile-terraforming
+- 依存関係を含めた環境一式がcontainerとしてまとめられている
+- hostを汚さないで済む
+
+* Dockerfile
+
+- DSL for container setup
+- 1行毎にコミット生成され、行の記述を変更したりコピー元のファイル変更しない限りは次回以降キャッシュを使うようになる
+- 構文はシンプルだけど似たようなコマンド幾つかあっていつも悩む(´・ω・`)
+- ADDとCOPY
+- ADDの方が機能多い(圧縮ファイルの自動解凍とか)がCOPYの方が好ましいとのこと
+- COPYを使いましょう
+- CMDとENTRYPOINT
+- ENTRYPOINTはimageのメインとなるコマンド(デフォルトは/bin/sh -cになっている)
+- CMDはフラグ(docker run した時のパラメータで書換できる)
+.link https://docs.docker.com/engine/reference/builder/#/dockerfile-reference
+.link https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
+
+- saiyo1/m2's case
+- X's case
+
+* saiyo1/m2's Dockerfile
+
+  FROM gliderlabs/alpine:latest
+  
+  ENV BUILD_PACKAGES bash wget curl tar make gcc alpine-sdk zlib zlib-dev readline 
+  ENV GEM_PACKAGES openssl openssl-dev libxml2-dev libxslt-dev mysql mariadb-dev imagemagick imagemagick-dev imagemagick-c++ ruby-rmagick
+  
+  RUN apk update && \
+      apk upgrade && \
+      apk --no-cache add tzdata \
+      $BUILD_PACKAGES $GEM_PACKAGES && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    apk del tzdata 
+  
+  # build ruby
+  RUN wget -q -O ruby-1.8.7-p374.tar.gz http://cache.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p374.tar.gz && \
+      tar -zxvf ruby-1.8.7-p374.tar.gz && \
+      rm ruby-1.8.7-p374.tar.gz
+  
+  WORKDIR ruby-1.8.7-p374
+  RUN ./configure --with-openssl-dir=/usr/bin
+  RUN make
+  RUN make install
+  
+* saiyo1/m2's Dockerfile - 続き
+
+  # install rubygems
+  WORKDIR /
+  RUN wget http://production.cf.rubygems.org/rubygems/rubygems-1.3.7.tgz && \
+      tar -zxvf rubygems-1.3.7.tgz && \
+      rm rubygems-1.3.7.tgz
+  WORKDIR rubygems-1.3.7
+  RUN ruby setup.rb
+  
+  RUN gem install bundler
+  
+  WORKDIR /home/app
+  # bundle 
+  COPY Gemfile /home/app/
+  #COPY Gemfile.lock /home/app/
+  RUN bundle install
+  COPY . /home/app
+  
+  CMD ["ruby", "./script/server"]
+
+* saiyo1/m2's Dockerfile - 改善すべき点
+
+- 初めてpullする時に時間が掛かり過ぎる
+- apk, ruby build, rubygems setup, bundle installあたりのあまり変わらない部分と
+- copy source, run scriptあたりの頻繁に変わる部分が混ざっている
+- COPY . /home/appより上の部分はsaiyo1/saiyom2で共通、うまくシェアしたい
+
+* x's Dockerfile 1
+
+  FROM mhart/alpine-node:5
+  
+  # RUN apk add --update nodejs
+  RUN apk --no-cache add make gcc g++ python tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    apk del tzdata 
+  
+  COPY package.json /app/
+  WORKDIR /app
+  
+  RUN cd /app \
+    && npm install
+
+- このcontainer imageをaws ecr(private docker registry)にnodebaseとしてpush
+
+* x's Dockerfile 2
+
+  FROM 406545189473.dkr.ecr.us-east-1.amazonaws.com/nodebase:latest
+  
+  COPY . /app
+  WORKDIR /app
+  
+  RUN cd /app \
+    && npm rebuild node-sass \
+    && npm run compile
+  
+  EXPOSE 3000
+  
+  CMD ["npm", "run", "cluster"]
+
+- nodebaseを元にcopy sourceとrun script部分を生やしたcontainer image
+- nodebase部分の時間を短縮できる
+
+
