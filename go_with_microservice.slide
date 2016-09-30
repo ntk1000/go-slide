@@ -22,21 +22,39 @@ http://ntk1000.github.io/zlog
 
 
 * go batch with docker
+- require
+- goal
+- result
+- batch dir
+- golang library
+- golang source
+- compile
+- docker run
+- summary
 
-** require
+* require - go batch with docker
+- TODO
 
-** goal
+* goal - go batch with docker
+- TODO
 
-** result
+* result - go batch with docker
+- TODO
 
-** batch dir with docker
+* batch dir - go batch with docker
+- TODO
 
-** golang library
+* golang library - go batch with docker
+- TODO
 
-** golang source
+* golang source - go batch with docker
+- TODO
 
-** compile
+* compile - go batch with docker
+- TODO
 
-** docker run
+* docker run - go batch with docker
+- TODO
 
-
+* summary - go batch with docker
+- TODO
