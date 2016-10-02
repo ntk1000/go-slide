@@ -22,39 +22,141 @@ http://ntk1000.github.io/zlog
 
 
 * go batch with docker
-- require
 - goal
-- result
-- batch dir
+- require
+- actual
 - golang library
 - golang source
 - compile
 - docker run
 - summary
 
-* require - go batch with docker
-- TODO
-
 * goal - go batch with docker
-- TODO
+- accept multiple triggers
+  e-mail
+  scheduler
+  manual
+- in case of failure, re-run
+- auto scale
 
-* result - go batch with docker
-- TODO
+* require - go batch with docker
+- on AWS EC2
+- in Docker Container by AWS ECS
+- AWS SQS long polling
+
+* actual - go batch with docker
+- multiple of batch's start point
+- Dockernize
 
 * batch dir - go batch with docker
-- TODO
+  etc
+    ├ docker-compose.yml
+    └ go-build-batch.sh
+  batch
+    ├ cmd
+    │ ├ a
+    │ │ ├ internal
+    │ │ └ cmd.go
+    │ └ b
+    │   ├ internal
+    │   └ cmd.go
+    ├ deploy
+    │   ├ a
+    │   │ └ Dockerfile
+    │   └ b
+    │     └ Dockerfile
+    ├ internal
+    ├ root
+    │   └ root.go
+    └ main.go
 
-* golang library - go batch with docker
-- TODO
+* golang source(1) - go batch with docker
+  batch
+    ├ cmd
+    │ └ a
+    │   └ cmd.go
+    ├ root
+    │   └ root.go
+    └ *main.go*
 
-* golang source - go batch with docker
-- TODO
+* golang source(1) - go batch with docker
+- batch/main.go
+.code source/main.go /^func main/,/^}/
+
+* golang source(2) - go batch with docker
+  batch
+    ├ cmd
+    │ └ a
+    │   └ cmd.go
+    ├ root
+    │   └ *root.go*
+    └ main.go
+
+* golang source(2) - go batch with docker
+- batch/root/root.go
+.code source/root.go
+
+* golang source(3) - go batch with docker
+  batch
+    ├ cmd
+    │ └ a
+    │   └ *cmd.go*
+    ├ root
+    │   └ root.go
+    └ main.go
+
+* golang source(3) - go batch with docker
+- batch/cmd/a/cmd.go
+.code source/cmd.go /^import/,/^}/
 
 * compile - go batch with docker
-- TODO
+  etc
+    ├ docker-compose.yml
+    └ *go-build-batch.sh*
+  batch
+    └ deploy
+        ├ a
+        │ └ Dockerfile
+        └ b
+          └ Dockerfile
 
-* docker run - go batch with docker
-- TODO
+* compile - go batch with docker
+- etc/go-build-batch.sh
+.code source/go-build-batch.sh
+
+* docker source(1) - go batch with docker
+  etc
+    ├ docker-compose.yml
+    └ go-build-batch.sh
+  batch
+    └ deploy
+        ├ a
+        │ ├ *Dockerfile*
+        │ └ xxxmicro
+        └ b
+          ├ Dockerfile
+          └ xxxmicro
+
+* docker source(1) - go batch with docker
+- batch/deply/a/Dockerfile
+.code source/Dockerfile
+
+* docker source(2) - go batch with docker
+  etc
+    ├ *docker-compose.yml*
+    └ go-build-batch.sh
+  batch
+    └ deploy
+        ├ a
+        │ ├ Dockerfile
+        │ └ xxxmicro
+        └ b
+          ├ Dockerfile
+          └ xxxmicro
+
+* docker source(2) - go batch with docker
+- etc/docker-compose.yml
+.code source/docker-compose.yml
 
 * summary - go batch with docker
 - TODO

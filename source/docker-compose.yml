@@ -1,0 +1,8 @@
+    crawler:
+        build: ../batch/deploy/a
+        environment:
+          # any config
+        depends_on:
+          # any config
+        networks:
+          # any config
