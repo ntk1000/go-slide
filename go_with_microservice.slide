@@ -8,57 +8,115 @@ http://ntk1000.github.io/zlog
 @ntk1000
 
 * about me
+
 - intelligence seeds company
 - father of 2 boyz (5 and 1)
 
 * about seeds company
+
 - hito manager
 - applicant tracking system
 - b2c/b2b
 
 * project
-- monolithic rails app -> "microservice" architecture
+
+from 
+
+    monolithic rails app 
+
+to 
+
+    "microservice" architecture
+
 
 * why "microservice"?
+
 😭
+
 - 少しの機能修正で全体をdeployし直さないといけない
 - 特定顧客専用の機能が管理上全体に適用されている
 - 密結合してしまったcode
 
+😌
+
+- 個別にdeploy
+- 最適な技術の適用
+- 機能別にscale up/down
+
 * how to develop microservices
+
 - 機能毎にserviceとして分割
-- (顧客数 x 機能)数ぶんserviceを立ち上げる必要がある
-- container化してresource節約🐳
+- (顧客数 x 機能)数ぶんserviceを立ち上げる必要
+- container🐳化してresource節約
 
 * why golang?
+
 .image ./img/go_langtree.png 350 _
 - 1つのbinaryにまとめられるportablity
 - Dockerfile上ではbuildしたbinaryをADDするだけ
 - 起動早くimage size小さく、containerと相性良い実感💜
 
+* Dockerfile
+
+    FROM gliderlabs/alpine:3.3
+    RUN apk update
+
+    ADD . /app
+    WORKDIR /app
+
+    EXPOSE 8080
+    CMD ["/app/appName"]
+
 * pattern
-- backends for frontends
+
+backends for frontends
 .image ./img/bff.png 350 _
 
 * pattern
-- api gateway
-.image ./img/apigateway.png 350 _
+
+api gateway
+.image ./img/gateway.png 350 _
 
 * framework
-- echo https://github.com/labstack/echo
+
+.link https://github.com/labstack/echo echo
 
 * why echo?
+
 - 速さと軽さ
 - go-kitなどmicroservice向けframeworkも検討したがしっくりこなかった
 
 * architecture
-.image ./img/aws.png 550 _
+
+.image ./img/aws.png 580 1800
+
+* architecture
+
+- orchestration: aws ecs
+- container registry: aws ecr
+- service discovery: aws elb/alb
+- container hostos: coreos
+
+* api layer
+
+- frontend: ui / ui backend
+- gateway: apigateway / bff
+- backend: 各機能毎のAPI
 
 * 失敗
+
 - 下位のAPIで更新がある度にgateway実装が必要
 - gatewayがfat且つSPOFに
+- 開発が進んでAPIが増える毎に除々にgatewayの存在が負担に...
+
+* api gateway oss
+
+.link https://getkong.org/ kong
+
+.link https://tyk.io/ tyk
 
 * summary
+
 - 
 
 * go batch with docker
