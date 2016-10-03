@@ -14,47 +14,45 @@ http://ntk1000.github.io/zlog
 
 * about seeds company
 
-- hito manager
-- applicant tracking system
-- b2c/b2b
+- b2c/b2b web service
 
 * project
 
 from 
 
-    monolithic rails app 
+    legacy monolithic rails app 
 
 to 
 
-    "microservice" architecture
+    "microservice"s
 
 
 * why "microservice"?
 
 😭
 
-- 少しの機能修正で全体をdeployし直さないといけない
+- 一部の機能について全体が影響を受ける
 - 特定顧客専用の機能が管理上全体に適用されている
 - 密結合してしまったcode
 
 😌
 
-- 個別にdeploy
-- 最適な技術の適用
+- 影響局所化、個別deploy
+- 機能の特性に応じた最適な技術の適用
 - 機能別にscale up/down
 
 * how to develop microservices
 
-- 機能毎にserviceとして分割
-- (顧客数 x 機能)数ぶんserviceを立ち上げる必要
+- メニュー毎にserviceとして分割(ユーザー、スケジュール管理、等)
+- (顧客数 x メニュー)数ぶんserviceが立ち上げる構成
 - container🐳化してresource節約
 
 * why golang?
 
-.image ./img/go_langtree.png 350 _
 - 1つのbinaryにまとめられるportablity
 - Dockerfile上ではbuildしたbinaryをADDするだけ
-- 起動早くimage size小さく、containerと相性良い実感💜
+- 起動も早く、image sizeも小さく、containerと相性良い実感💜
+- (個人的には) team開発のしやすさ
 
 * Dockerfile
 
@@ -64,8 +62,12 @@ to
     ADD . /app
     WORKDIR /app
 
-    EXPOSE 8080
     CMD ["/app/appName"]
+
+- base imageとしてはalpineを採用
+- ADDでtest/build後のbinaryをcontainerに渡している
+- CMDでbinaryを実行
+
 
 * pattern
 
