@@ -31,31 +31,31 @@ to
 
 * why "microservice"?
 
-😭
+😭 辛み
 
 - 密結合してしまったcode
 - 一部の機能について全体が影響を受けてしまう
 - 特定顧客専用の機能が管理上全体に適用されている
 - 負荷の高い・低い機能が混在しており最適なscale up/downができない
 
-😌
+😌 解決？
 
 - serviceという単位で影響範囲を限定
 - 機能の特性に応じた最適な技術の適用
 - 特定顧客専用機能も付加serviceという形で切出し可能
-- 機能別にscale up/downが可能
+- 機能の負荷に応じて機能単位でscale up/downが可能
 
 * how to develop microservices
 
-- メニュー毎にserviceとして分割(ユーザー、スケジュール管理、等)
-- (顧客 x メニュー)数ぶんserviceが立ち上げる構成を想定
-- container🐳化してresource節約 -> docker
+- メニュー毎にserviceとして分割 (ユーザー、スケジュール管理、等)
+- (顧客 x メニュー) 数ぶんserviceが立ち上げる構成を想定
+- container🐳化してresource節約 -> dockeの採用
 
 why golang?
 
 - 1つのbinaryにまとめられるportablity
 - Dockerfile上ではbuildしたbinaryをADDするだけ
-- 起動も早く、image sizeも小さく、containerと親和性高い
+- 起動も早くimage sizeも小さいため、containerと親和性高い
 - (個人的には) team開発のしやすさも(fmt etc.)
 
 * Dockerfile
@@ -69,14 +69,13 @@ why golang?
     CMD ["/app/appName"]
 
 - base imageとして軽量なalpineを採用
-- ADDでtest/build後のbinaryをcontainerに渡すだけ
-- CMDでbinaryを実行
+- test/build後のbinaryをADDでcontainerに渡すだけ
 
-* pattern
+* API pattern
 
-- メニュー(機能)は独立したserviceとしてRESTなWebAPIとして動作させる
+- メニュー(service)は独立したRESTなWebAPIとして動作させる
 - 一方で機能を使う側(主にWebUI)には各serviceの詳細は意識させたくない
-- 各APIとclientの間にfacade的な役割を置きたい
+- つまり、各APIとclientの間にfacade的な役割を置きたい
 
 * backends for frontends (or api gateway)
 
@@ -95,9 +94,9 @@ why echo?
 
 * api layer
 
-- 1st layer -> frontend : ui / ui backend
-- 2nd layer -> gateway : bff / api gateway
-- 3rd layer -> backend : each service API
+- 1st layer -> ui / ui backend としてのfrontend層
+- 2nd layer -> bff / api gateway としてのgateway層
+- 3rd layer -> 各service APIを配置するbackend層
 
 * architecture overview
 .image ./img/aws.png 580 _
@@ -115,7 +114,6 @@ why echo?
 開発が進み、APIが増える毎にgatewayの自作が負担に...
 
 - backendにおける各APIで更新がある度、gateway実装/deployが必要
-- gatewayが除々にfat化
 - ecs/elbで分散されるとはいえ、gatewayの存在がSPOFに
 
 どうすれば？
