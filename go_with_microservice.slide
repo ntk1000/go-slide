@@ -10,10 +10,12 @@ http://ntk1000.github.io/zlog
 * about me
 
 - intelligence seeds company
-- father of 2 boyz (5 and 1)
+- father of 2 boyz (5歳と1歳)
 
-* about seeds company
+about seeds company
 
+- hito-manager
+- applicant tracking system
 - b2c/b2b web service
 
 * project
@@ -47,7 +49,7 @@ to
 - (顧客数 x メニュー)数ぶんserviceが立ち上げる構成
 - container🐳化してresource節約
 
-* why golang?
+why golang?
 
 - 1つのbinaryにまとめられるportablity
 - Dockerfile上ではbuildしたbinaryをADDするだけ
@@ -68,29 +70,39 @@ to
 - ADDでtest/build後のbinaryをcontainerに渡している
 - CMDでbinaryを実行
 
+* service pattern
 
-* pattern
+- 各機能はserviceとして独立させたい
+- 機能を使う側(主にWebUI)には各serviceの詳細は意識させたくない
 
-backends for frontends
+backends for frontends (or api gateway)
 .image ./img/bff.png 350 _
-
-* pattern
-
-api gateway
-.image ./img/gateway.png 350 _
 
 * framework
 
 .link https://github.com/labstack/echo echo
 
-* why echo?
+why echo?
 
 - 速さと軽さ
 - go-kitなどmicroservice向けframeworkも検討したがしっくりこなかった
 
+* api layer
+
+- frontend 
+ui / ui backend
+
+- gateway
+bff / apigateway
+
+- backend
+各機能毎のAPI
+
+
 * architecture
 
 .image ./img/aws.png 580 1800
+
 
 * architecture
 
@@ -99,167 +111,29 @@ api gateway
 - service discovery: aws elb/alb
 - container hostos: coreos
 
-* api layer
+* gateway...
 
-- frontend: ui / ui backend
-- gateway: apigateway / bff
-- backend: 各機能毎のAPI
+失敗
 
-* 失敗
-
-- 下位のAPIで更新がある度にgateway実装が必要
-- gatewayがfat且つSPOFに
+- backend APIで更新がある度にgateway実装が必要
+- gatewayがfat且つSPOF
 - 開発が進んでAPIが増える毎に除々にgatewayの存在が負担に...
+
+そもそも
+
+- APIの追加・更新はpluggableに行えたほうがよさそう
+- この部分はbuild前提なgoに向いてない？
 
 * api gateway oss
 
+下記のようなapi gateway toolの導入を検討中
+
 .link https://getkong.org/ kong
+.image https://camo.githubusercontent.com/97aabdfeec1d04a818e3393c3bade3f54704852f/687474703a2f2f692e696d6775722e636f6d2f346a795151415a2e706e67 130 _
 
 .link https://tyk.io/ tyk
+.image https://tyk.io/wp-content/uploads/2016/03/TYK_FullLogo_WhiteText-1.png 150 _
 
 * summary
 
 - 
-
-* go batch with docker
-- require
-- architecture
-- actual
-- golang library
-- golang source
-- golang compile
-- docker code
-- summary
-
-* require - go batch with docker
-- accept multiple triggers
-  e-mail
-  scheduler
-  manual
-- in case of failure, re-run
-- auto scale
-
-* architecture - go batch with docker
-- on AWS EC2
-- in Docker Container by AWS ECS
-- AWS SQS long polling
-
-* actual - go batch with docker
-- enable to create multiple batches
-- Dockernize
-
-* batch dir - go batch with docker
-  etc
-    ├ docker-compose.yml
-    └ go-build-batch.sh
-  batch
-    ├ cmd
-    │ ├ a
-    │ │ ├ internal
-    │ │ └ cmd.go
-    │ └ b
-    │   ├ internal
-    │   └ cmd.go
-    ├ deploy
-    │   ├ a
-    │   │ └ Dockerfile
-    │   └ b
-    │     └ Dockerfile
-    ├ internal
-    ├ root
-    │   └ root.go
-    └ main.go
-
-* golang source(1) - go batch with docker
-  batch
-    ├ cmd
-    │ └ a
-    │   └ cmd.go
-    ├ root
-    │   └ root.go
-    └ *main.go*
-
-* golang source(1) - go batch with docker
-- batch/main.go
-.code source/main.go /^func main/,/^}/
-
-* golang source(2) - go batch with docker
-  batch
-    ├ cmd
-    │ └ a
-    │   └ cmd.go
-    ├ root
-    │   └ *root.go*
-    └ main.go
-
-* golang source(2) - go batch with docker
-- batch/root/root.go
-.code source/root.go
-
-* golang source(3) - go batch with docker
-  batch
-    ├ cmd
-    │ └ a
-    │   └ *cmd.go*
-    ├ root
-    │   └ root.go
-    └ main.go
-
-* golang source(3) - go batch with docker
-- batch/cmd/a/cmd.go
-.code source/cmd.go /^import/,/^}/
-
-* golang compile - go batch with docker
-  etc
-    ├ docker-compose.yml
-    └ *go-build-batch.sh*
-  batch
-    └ deploy
-        ├ a
-        │ └ Dockerfile
-        └ b
-          └ Dockerfile
-
-* compile - go batch with docker
-- etc/go-build-batch.sh
-.code source/go-build-batch.sh
-'batch/main.go' is compiled,  a binary file is copied to each folders under 'deploy'.
-
-* docker code(1) - go batch with docker
-  etc
-    ├ docker-compose.yml
-    └ go-build-batch.sh
-  batch
-    └ deploy
-        ├ a
-        │ ├ *Dockerfile*
-        │ └ xxxmicro
-        └ b
-          ├ Dockerfile
-          └ xxxmicro
-
-* docker code(1) - go batch with docker
-- batch/deply/a/Dockerfile
-.code source/Dockerfile
-
-* docker code(2) - go batch with docker
-  etc
-    ├ *docker-compose.yml*
-    └ go-build-batch.sh
-  batch
-    └ deploy
-        ├ a
-        │ ├ Dockerfile
-        │ └ xxxmicro
-        └ b
-          ├ Dockerfile
-          └ xxxmicro
-
-* docker code(2) - go batch with docker
-- etc/docker-compose.yml
-.code source/docker-compose.yml
-
-* summary - go batch with docker
-- only one 'func main'
-- subcommand-based CLIs. such as 'spf13/cobra'
-- infinite loop for a docker process and AWS SQS polling
