@@ -8,17 +8,58 @@ http://ntk1000.github.io/zlog
 @ntk1000
 
 * about me
+- intelligence seeds company
+- father of 2 boyz (5 and 1)
 
-* me
-- 2016/01 -
-- intelligenct media div. seeds company X
-- wannabe programmer
-- father of 2 boyz (4 and 0)
+* about seeds company
+- hito manager
+- applicant tracking system
+- b2c/b2b
 
-名前：浅野潤
-所属：Intelligence SEEDS COMPANY
-得意：元C#, Java, python, hadoop あたりを使っていましたがgo使いにジョブチェンジできるよう日々訓練中です
-自己紹介：1996年のhiphop好きな中年、2児の父をやっております
+* project
+- monolithic rails app -> "microservice" architecture
+
+* why "microservice"?
+😭
+- 少しの機能修正で全体をdeployし直さないといけない
+- 特定顧客専用の機能が管理上全体に適用されている
+- 密結合してしまったcode
+
+* how to develop microservices
+- 機能毎にserviceとして分割
+- (顧客数 x 機能)数ぶんserviceを立ち上げる必要がある
+- container化してresource節約🐳
+
+* why golang?
+.image ./img/go_langtree.png 350 _
+- 1つのbinaryにまとめられるportablity
+- Dockerfile上ではbuildしたbinaryをADDするだけ
+- 起動早くimage size小さく、containerと相性良い実感💜
+
+* pattern
+- backends for frontends
+.image ./img/bff.png 350 _
+
+* pattern
+- api gateway
+.image ./img/apigateway.png 350 _
+
+* framework
+- echo https://github.com/labstack/echo
+
+* why echo?
+- 速さと軽さ
+- go-kitなどmicroservice向けframeworkも検討したがしっくりこなかった
+
+* architecture
+.image ./img/aws.png 550 _
+
+* 失敗
+- 下位のAPIで更新がある度にgateway実装が必要
+- gatewayがfat且つSPOFに
+
+* summary
+- 
 
 * go batch with docker
 - require
