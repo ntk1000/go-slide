@@ -20,18 +20,17 @@ http://ntk1000.github.io/zlog
 得意：元C#, Java, python, hadoop あたりを使っていましたがgo使いにジョブチェンジできるよう日々訓練中です
 自己紹介：1996年のhiphop好きな中年、2児の父をやっております
 
-
 * go batch with docker
-- goal
 - require
+- architecture
 - actual
 - golang library
 - golang source
-- compile
-- docker run
+- golang compile
+- docker code
 - summary
 
-* goal - go batch with docker
+* require - go batch with docker
 - accept multiple triggers
   e-mail
   scheduler
@@ -39,13 +38,13 @@ http://ntk1000.github.io/zlog
 - in case of failure, re-run
 - auto scale
 
-* require - go batch with docker
+* architecture - go batch with docker
 - on AWS EC2
 - in Docker Container by AWS ECS
 - AWS SQS long polling
 
 * actual - go batch with docker
-- multiple of batch's start point
+- enable to create multiple batches
 - Dockernize
 
 * batch dir - go batch with docker
@@ -109,7 +108,7 @@ http://ntk1000.github.io/zlog
 - batch/cmd/a/cmd.go
 .code source/cmd.go /^import/,/^}/
 
-* compile - go batch with docker
+* golang compile - go batch with docker
   etc
     ├ docker-compose.yml
     └ *go-build-batch.sh*
@@ -123,8 +122,9 @@ http://ntk1000.github.io/zlog
 * compile - go batch with docker
 - etc/go-build-batch.sh
 .code source/go-build-batch.sh
+'batch/main.go' is compiled,  a binary file is copied to each folders under 'deploy'.
 
-* docker source(1) - go batch with docker
+* docker code(1) - go batch with docker
   etc
     ├ docker-compose.yml
     └ go-build-batch.sh
@@ -137,11 +137,11 @@ http://ntk1000.github.io/zlog
           ├ Dockerfile
           └ xxxmicro
 
-* docker source(1) - go batch with docker
+* docker code(1) - go batch with docker
 - batch/deply/a/Dockerfile
 .code source/Dockerfile
 
-* docker source(2) - go batch with docker
+* docker code(2) - go batch with docker
   etc
     ├ *docker-compose.yml*
     └ go-build-batch.sh
@@ -154,9 +154,11 @@ http://ntk1000.github.io/zlog
           ├ Dockerfile
           └ xxxmicro
 
-* docker source(2) - go batch with docker
+* docker code(2) - go batch with docker
 - etc/docker-compose.yml
 .code source/docker-compose.yml
 
 * summary - go batch with docker
-- TODO
+- only one 'func main'
+- subcommand-based CLIs. such as 'spf13/cobra'
+- infinite loop for a docker process and AWS SQS polling

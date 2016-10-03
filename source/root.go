@@ -5,7 +5,7 @@ import (
 	// any imports
 )
 
-// New contained all command
+// New contained all subcommands
 func New() *cobra.Command {
 
 	var rootCmd = &cobra.Command{Use: "xxxmicro"}

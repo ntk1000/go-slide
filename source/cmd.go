@@ -13,6 +13,7 @@ func New() *cobra.Command {
 		Short: "xxx",
 		Long:  `xxx batch.`,
 		Run: func(cmd *cobra.Command, args []string) {
+			// Docker process
 			for {
 				// any codes
 				// e.x. polling to AWS SQS
