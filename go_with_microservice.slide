@@ -22,7 +22,7 @@ about seeds company
 
 from 
 
-    legacy monolithic rails app 
+    monolithic legacy rails app 
 
 to 
 
@@ -49,7 +49,7 @@ to
 
 - メニュー毎にserviceとして分割 (ユーザー、スケジュール管理、等)
 - (顧客 x メニュー) 数ぶんserviceが立ち上げる構成を想定
-- container🐳化してresource節約 -> dockeの採用
+- container🐳化してresource節約 ->dockerの採用
 
 why golang?
 
@@ -73,8 +73,8 @@ why golang?
 
 * API pattern
 
-- メニュー(service)は独立したRESTなWebAPIとして動作させる
-- 一方で機能を使う側(主にWebUI)には各serviceの詳細は意識させたくない
+- メニュー(service)は独立したRESTful APIとして動作させる
+- 一方で機能を使うclient(主にWebUI)には各serviceの詳細は意識させたくない
 - つまり、各APIとclientの間にfacade的な役割を置きたい
 
 * backends for frontends (or api gateway)
@@ -109,12 +109,12 @@ why echo?
 - log aggregation/management: docker log + cloudwatch + elasticsearch
 - container hostos: coreos
 
-* gateway...
+* gateway問題点
 
 開発が進み、APIが増える毎にgatewayの自作が負担に...
 
 - backendにおける各APIで更新がある度、gateway実装/deployが必要
-- ecs/elbで分散されるとはいえ、gatewayの存在がSPOFに
+- ecs/elbで負荷分散されるとはいえ、gatewayの存在がSPOFに
 
 どうすれば？
 
