@@ -1,5 +1,14 @@
-    crawler:
+    a:
         build: ../batch/deploy/a
+        environment:
+          # any config
+        depends_on:
+          # any config
+        networks:
+          # any config
+
+    b:
+        build: ../batch/deploy/b
         environment:
           # any config
         depends_on:

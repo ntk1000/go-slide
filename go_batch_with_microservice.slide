@@ -1,0 +1,208 @@
+go with microservice
+container, gateway, batch
+4 Oct 2016
+Tags: golang,docker,microservice
+
+柚田智哉
+Intelligence SEEDS COMPANY
+
+* about me
+2016/03にIntelligenceへ入社し、新プロダクトの開発に携わる。
+当時は主としてバッチ部分の実装を担当していた。
+
+* go batch with microservice
+- require
+- architecture
+- actual
+- process
+- go batch in docker
+- batch dir
+- golang source
+- golang compile
+- docker code
+- others(microservice)
+- summary
+
+* require
+- 実行契機は複数あり得る
+  スケジュール実行
+  手動実行
+  メール受信時実行 <- もはやバッチではない…？
+- 実行失敗時はre-runする
+- オートスケールする
+
+* architecture
+- AWS EC2上で実行する
+- AWS ECSによりDockerコンテナで実行する
+- AWS SQSに対するポーリングを行う
+
+* actual
+- Go言語を用いて実装している
+- Docker化している
+- AWS EC2上には載せようとしていた（途中）
+
+* process(1)
+Goでどうバッチを実装すべきか、模範例が見つからなかった
+-> 社内のエンジニアの方々の意見をいただく
+
+* process(2)
+当初は1バッチに対して1mainの単位で実装していた
+コンパイルに時間がかかる。
+-> バッチ共通で1mainにするとコンパイルに時間がかからないという声（from Oさん）
+
+* process(3)
+mainが一つだとバッチ別で開始点を切り替える必要あり
+-> CLI applicationを作るならspf13/cobraが使いやすいという声（from Kさん）
+
+* process(4)
+実践してみた
+-> 実装しやすい
+
+* go batch in docker
+以降、Goでバッチを作成し、Dockernizeするまでの流れ
+
+* batch dir
+  etc
+    ├ docker-compose.yml
+    └ go-build-batch.sh
+  batch
+    ├ cmd
+    │ ├ a
+    │ │ ├ internal
+    │ │ └ cmd.go
+    │ └ b
+    │   ├ internal
+    │   └ cmd.go
+    ├ deploy
+    │   ├ a
+    │   │ └ Dockerfile
+    │   └ b
+    │     └ Dockerfile
+    ├ internal
+    ├ root
+    │   └ root.go
+    └ main.go
+mainを一つにして、cmdディレクトリ以下にバッチ別のディレクトリを作成する
+
+* golang source(1)
+  batch
+    ├ cmd
+    │ └ a
+    │   └ cmd.go
+    ├ root
+    │   └ root.go
+    └ *main.go*
+
+* golang source(1)
+- batch/main.go
+.code source/main.go /^func main/,/^}/
+バッチ別の処理は書かない。実行するだけ
+
+* golang source(2)
+  batch
+    ├ cmd
+    │ └ a
+    │   └ cmd.go
+    ├ root
+    │   └ *root.go*
+    └ main.go
+
+* golang source(2)
+- batch/root/root.go
+.code source/root.go
+バッチa、バッチbをサブコマンドに登録している
+
+* golang source(3)
+  batch
+    ├ cmd
+    │ └ a
+    │   └ *cmd.go*
+    ├ root
+    │   └ root.go
+    └ main.go
+
+* golang source(3)
+- batch/cmd/a/cmd.go
+.code source/cmd.go /^import/,/^}/
+
+* golang source(3)
+- batch/cmd/a/cmd.go
+バッチ別の処理を記述する
+
+* golang compile
+  etc
+    ├ docker-compose.yml
+    └ *go-build-batch.sh*
+  batch
+    └ deploy
+        ├ a
+        │ └ Dockerfile
+        └ b
+          └ Dockerfile
+- deployディレクトリ以下にバッチ別のディレクトリを切る
+
+* golang compile
+- etc/go-build-batch.sh
+.code source/go-build-batch.sh
+batch/main.goをコンパイルし、生成したバイナリファイルをバッチ別にコピーする
+
+* docker code(1)
+  etc
+    ├ docker-compose.yml
+    └ go-build-batch.sh
+  batch
+    └ deploy
+        ├ a
+        │ ├ *Dockerfile*
+        │ └ xxxmicro
+        └ b
+          ├ Dockerfile
+          └ xxxmicro
+
+* docker code(1)
+- batch/deply/a/Dockerfile
+.code source/Dockerfile
+バッチ別で異なるサブコマンドを実行している
+
+* docker code(2)
+  etc
+    ├ *docker-compose.yml*
+    └ go-build-batch.sh
+  batch
+    └ deploy
+        ├ a
+        │ ├ Dockerfile
+        │ └ xxxmicro
+        └ b
+          ├ Dockerfile
+          └ xxxmicro
+バイナリファイル（xxxmicro）が各ディレクトリに配置されている
+
+* docker code(2)
+- etc/docker-compose.yml
+.code source/docker-compose.yml
+バッチa, バッチbそれぞれ記述する。
+
+* docker code(3)
+コマンド実行してDocker起動できる
+docker-compose up
+
+* others(microservice) (1)
+*バッチからデータ取得したい場合に、API立ててデータ取るべき？それとも直接DB検索して良い？*
+- マイクロサービス的にはAPI立てるべき
+- 直接DB検索するとサービスごとの仕様変更に弱くなってしまう（マイクロサービスにした意味がない）
+- APIの実装コストは少なくない上に、バッチでしか使わない非汎用的なAPIが乱立する
+
+-> 直接DB検索へ（時間優先）
+
+* others(microservice) (2)
+*ロガーはAPI/バッチで別々にしても良い？*
+- それぞれ扱いが異なるものとして、別々にロガーを選定/採用していた
+- 実際はAPIでもバッチでも使用する共通処理がある
+- 共通処理をAPI/バッチで別々に作りたくはないが、ロガーが違うのでどちらでログを出すべきか分からない
+
+-> ロガーは共通にしたかった（願望）
+
+* summary
+- Goでバッチを作り、Dockernizeできた
+- マイクロサービスとしてどこまで分離させるのか、共通化するのかの境界は要検討
