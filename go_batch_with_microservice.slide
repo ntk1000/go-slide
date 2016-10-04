@@ -41,22 +41,17 @@ Intelligence SEEDS COMPANY
 - Docker化している
 - AWS EC2上には載せようとしていた（途中）
 
-* process(1)
+* process
 Goでどうバッチを実装すべきか、模範例が見つからなかった
 -> 社内のエンジニアの方々の意見をいただく
 
-* process(2)
-当初は1バッチに対して1mainの単位で実装していた
+- 当初は1バッチに対して1mainの単位で実装していた
+
 コンパイルに時間がかかる。
--> バッチ共通で1mainにするとコンパイルに時間がかからないという声（from Oさん）
+-> バッチ共通で1mainにするとコンパイルに時間がかからないという声（from 大谷さん）
 
-* process(3)
-mainが一つだとバッチ別で開始点を切り替える必要あり
--> CLI applicationを作るならspf13/cobraが使いやすいという声（from Kさん）
-
-* process(4)
-実践してみた
--> 実装しやすい
+- mainが一つだとバッチ別で開始点を切り替える必要あり
+-> CLI applicationを作るならspf13/cobraが使いやすいという声（from 小松さん）
 
 * go batch in docker
 以降、Goでバッチを作成し、Dockernizeするまでの流れ
@@ -85,6 +80,8 @@ mainが一つだとバッチ別で開始点を切り替える必要あり
 mainを一つにして、cmdディレクトリ以下にバッチ別のディレクトリを作成する
 
 * golang source(1)
+batch/main.go
+
   batch
     ├ cmd
     │ └ a
@@ -94,11 +91,13 @@ mainを一つにして、cmdディレクトリ以下にバッチ別のディレ�
     └ *main.go*
 
 * golang source(1)
-- batch/main.go
+batch/main.go
 .code source/main.go /^func main/,/^}/
 バッチ別の処理は書かない。実行するだけ
 
 * golang source(2)
+batch/root/root.go
+
   batch
     ├ cmd
     │ └ a
@@ -108,11 +107,13 @@ mainを一つにして、cmdディレクトリ以下にバッチ別のディレ�
     └ main.go
 
 * golang source(2)
-- batch/root/root.go
+batch/root/root.go
 .code source/root.go
 バッチa、バッチbをサブコマンドに登録している
 
 * golang source(3)
+batch/cmd/a/cmd.go
+
   batch
     ├ cmd
     │ └ a
@@ -122,14 +123,18 @@ mainを一つにして、cmdディレクトリ以下にバッチ別のディレ�
     └ main.go
 
 * golang source(3)
-- batch/cmd/a/cmd.go
+batch/cmd/a/cmd.go
 .code source/cmd.go /^import/,/^}/
 
 * golang source(3)
-- batch/cmd/a/cmd.go
-バッチ別の処理を記述する
+batch/cmd/a/cmd.go
+
+- バッチ別の処理を記述する
+- AWS SQSへのポーリング処理も記述する
 
 * golang compile
+etc/go-build-batch.sh
+
   etc
     ├ docker-compose.yml
     └ *go-build-batch.sh*
@@ -139,14 +144,27 @@ mainを一つにして、cmdディレクトリ以下にバッチ別のディレ�
         │ └ Dockerfile
         └ b
           └ Dockerfile
-- deployディレクトリ以下にバッチ別のディレクトリを切る
 
 * golang compile
-- etc/go-build-batch.sh
+etc/go-build-batch.sh
 .code source/go-build-batch.sh
 batch/main.goをコンパイルし、生成したバイナリファイルをバッチ別にコピーする
 
+* golang compile
+  batch
+    └ deploy
+        ├ a
+        │ ├ Dockerfile
+        │ └ xxxmicro
+        └ b
+          ├ Dockerfile
+          └ xxxmicro
+
+バイナリファイル（xxxmicro）が各ディレクトリに配置されている
+
 * docker code(1)
+batch/deploy/Dockerfile
+
   etc
     ├ docker-compose.yml
     └ go-build-batch.sh
@@ -160,11 +178,13 @@ batch/main.goをコンパイルし、生成したバイナリファイルをバ�
           └ xxxmicro
 
 * docker code(1)
-- batch/deply/a/Dockerfile
+batch/deply/a/Dockerfile
 .code source/Dockerfile
 バッチ別で異なるサブコマンドを実行している
 
 * docker code(2)
+etc/docker-compose.yml
+
   etc
     ├ *docker-compose.yml*
     └ go-build-batch.sh
@@ -176,11 +196,12 @@ batch/main.goをコンパイルし、生成したバイナリファイルをバ�
         └ b
           ├ Dockerfile
           └ xxxmicro
-バイナリファイル（xxxmicro）が各ディレクトリに配置されている
 
 * docker code(2)
-- etc/docker-compose.yml
+etc/docker-compose.yml
+
 .code source/docker-compose.yml
+
 バッチa, バッチbそれぞれ記述する。
 
 * docker code(3)
@@ -189,6 +210,7 @@ docker-compose up
 
 * others(microservice) (1)
 *バッチからデータ取得したい場合に、API立ててデータ取るべき？それとも直接DB検索して良い？*
+
 - マイクロサービス的にはAPI立てるべき
 - 直接DB検索するとサービスごとの仕様変更に弱くなってしまう（マイクロサービスにした意味がない）
 - APIの実装コストは少なくない上に、バッチでしか使わない非汎用的なAPIが乱立する
@@ -197,6 +219,7 @@ docker-compose up
 
 * others(microservice) (2)
 *ロガーはAPI/バッチで別々にしても良い？*
+
 - それぞれ扱いが異なるものとして、別々にロガーを選定/採用していた
 - 実際はAPIでもバッチでも使用する共通処理がある
 - 共通処理をAPI/バッチで別々に作りたくはないが、ロガーが違うのでどちらでログを出すべきか分からない
