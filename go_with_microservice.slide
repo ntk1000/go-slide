@@ -63,10 +63,10 @@ why golang?
     FROM gliderlabs/alpine:3.3
     RUN apk update
 
-    ADD . /app
+    ADD AppName /app/AppName
     WORKDIR /app
 
-    CMD ["/app/appName"]
+    CMD ["/app/AppName"]
 
 - base imageとして軽量なalpineを採用
 - test/build後のbinaryをADDでcontainerに渡すだけ
@@ -74,7 +74,7 @@ why golang?
 * API pattern
 
 - メニュー(service)は独立したRESTful APIとして動作させる
-- 一方で機能を使うclient(主にWebUI)には各serviceの詳細は意識させたくない
+- 一方でservice client(主にWebUI)には各serviceの詳細は意識させたくない
 - つまり、各APIとclientの間にfacade的な役割を置きたい
 
 * backends for frontends (or api gateway)
@@ -133,7 +133,7 @@ why echo?
 
 * summary
 
-- goでmicroservice化を進めた
+- golangでmicroservice化を進めた
 - 個々のAPI開発やcontainer化はやりやすかった
 - 一方でapi gatewayの開発には向かないように感じた
 
